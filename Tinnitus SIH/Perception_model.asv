@@ -1,0 +1,38 @@
+fs = 10e3;
+k=1;
+n = 0 : 1/fs : k - 1/fs ;
+a = 0.7;
+offset = 2 ;
+
+for i = 1:length(n)
+    model(i) = offset + (n(i) - a)^2 - 0.6*(n(i)-0.2)^8 - 0.6*(abs(n(i)-0.4))^0.5 + 0.5*n(i)^3 ;
+end
+% model(floor(length(n)/3)) = 
+model_noise = model + 0.004*randn([1 , length(n)]);
+
+figure(1);
+plot(model);
+
+figure(2);
+plot(model_noise);
+
+figure(3);
+plot(-10*log10(model_noise-min(model_noise)+0.001));
+
+noise = randn([1 , length(n)]);
+oscillation = 0.02*sin(2*pi*1e1*n);
+audio = noise + oscillation ;
+figure(4);
+plot(oscillation); 
+
+figure(5);
+plot(audio);
+
+figu
+
+
+
+
+
+
+
